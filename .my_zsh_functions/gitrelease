@@ -1,0 +1,9 @@
+gitrelease() {
+	VERSION=$1;	
+	git fetch &> /dev/null;
+	curr="${VERSION:-$(git describe --tags --abbrev=0 @)}";
+	prev=$(git describe --tags --abbrev=0 $curr^);
+	git remote show origin | awk '/Fetch URL: git@github.bamtech.co:/{print $NF}' | bat -l rs;
+	echo "$prev -> $curr" | bat -l rs;
+	git log --graph --pretty=format:'%h %s <%an>' --abbrev-commit $prev..$curr | bat -l rs;
+}

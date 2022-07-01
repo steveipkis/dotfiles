@@ -1,0 +1,8 @@
+gitnotes() {
+	git fetch &> /dev/null;
+	prev=$(git describe --tags --abbrev=0 @);
+	curr=$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD));
+	git remote show origin | awk '/Fetch URL: git@github.bamtech.co:/{print $NF}' | bat -l rs;
+	echo "Currenly unreleased changes in $curr" | bat -l rs;
+	git log --graph --pretty=format:'%h %s <%an>' --abbrev-commit $prev..$curr | bat -l rs;
+}

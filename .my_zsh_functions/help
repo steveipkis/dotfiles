@@ -1,0 +1,4 @@
+help() (
+    set -o pipefail
+    "$@" --help 2>&1 | bathelp
+)

@@ -1,0 +1,13 @@
+gitupdate() {
+
+	cd ~/Code/disney;
+	for i in $(ls -d */); do 
+		cd $i;
+		curr=$(basename $(git symbolic-ref --short refs/remotes/origin/HEAD));
+		git checkout $curr;
+		git fetch &> /dev/null;
+		git pull origin $curr;
+		cd ../.;
+	done;
+
+}
