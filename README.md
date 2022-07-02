@@ -16,6 +16,15 @@ This configuration entails:
 * [.my_zsh_functions](.my_zsh_functions): Custom functions I wrote and loaded into the environment.
 * [.config/nvim](.config/nvim): this configures nvim to use fzf, ag and a bunch of plugins to make vim use easy.
 
+## External Apps to Install
+
+* [iTerm2](https://iterm2.com/downloads.html)
+* [MacPass](https://github.com/MacPass/MacPass)
+* [PostgresApp](https://postgresapp.com/downloads.html)
+* [Postico](https://eggerapps.at/postico/)
+* [Postman](https://www.postman.com/downloads/)
+* [VsCode](https://code.visualstudio.com/download)
+  * [Foam](https://github.com/foambubble/foam)
 
 ## Deploying changes
 

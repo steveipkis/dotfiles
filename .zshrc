@@ -16,7 +16,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/hnadeem/.oh-my-zsh"
+export ZSH="~/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -27,10 +27,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ##########################################################
 
 ## Local Brew installation
-export PATH="/Users/hnadeem/Applications/homebrew/bin:$PATH"
+export PATH="~/Applications/homebrew/bin:$PATH"
 
 ## Local Plugins and Functions Configuration
-export FZF_BASE="/Users/hnadeem/Applications/homebrew/bin/fzf";
+export FZF_BASE="~/Applications/homebrew/bin/fzf";
 
 # zsh based plugins
 plugins=(zsh-autosuggestions zsh-peco-history fzf zsh-z)
@@ -94,13 +94,13 @@ fg() {
 
 # setting up java and scala
 export JAVA_HOME=$(/usr/libexec/java_home)
-export PATH="/Users/hnadeem/Applications/homebrew/opt/openjdk@8/bin:$PATH"
-export SCALA_HOME='/Users/hnadeem/Applications/homebrew/opt/scala@2.12'
+export PATH="~/Applications/homebrew/opt/openjdk@8/bin:$PATH"
+export SCALA_HOME='~/Applications/homebrew/opt/scala@2.12'
 export PATH=$PATH:$SCALA_HOME/bin
 export PATH=$PATH:/opt/apache-maven/bin
 
 # setting up spark 
-export SPARK_HOME="/Users/hnadeem/Applications/spark/python"
+export SPARK_HOME="~/Applications/spark/python"
 export PATH=$PATH:/usr/local/git/bin:$SPARK_HOME/bin
 
 # Add pyenv executable to PATH and
@@ -120,8 +120,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# sets up Postgres and openssl
+# sets up Postgres
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-export PATH="/Users/hnadeem/Applications/homebrew/opt/openssl@3/bin:$PATH"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

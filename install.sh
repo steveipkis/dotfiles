@@ -11,8 +11,10 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 ############################################################
 
 brew install bat \
+    dataframehq/tap/whale \
     exa \
     fzf \
+    jenv \
     jq  \
     neovim \
     peco \
@@ -45,6 +47,13 @@ source $(brew --prefix nvm)/nvm.sh
 nvm install ${NODE_VERSION};
 nvm use v${NODE_VERSION};
 nvm alias default v${NODE_VERSION};
+
+############################################################
+# Set up local zsh environment
+############################################################
+
+pyenv install 3.7.13
+pyenv global 3.7.13
 
 ############################################################
 # Set up local zsh environment
