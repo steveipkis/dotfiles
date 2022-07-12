@@ -49,7 +49,7 @@ nvm use v${NODE_VERSION};
 nvm alias default v${NODE_VERSION};
 
 ############################################################
-# Set up local zsh environment
+# Set up local python environment
 ############################################################
 
 pyenv install 3.7.13
@@ -62,9 +62,11 @@ pyenv global 3.7.13
 # 1. Install oh-my-zsh as a zshell plugin manager
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-# 2. Copy over the custom oh my-zsh-configurations
-mkdir -p ~/.oh-my-zsh
-cp -r .oh_my_zsh/custom ~/.oh-my-zsh/.;
+# 2.Install custom zsh plugins and themes
+git clone https://github.com/agkozak/zsh-z ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-z
+git clone https://github.com/jimeh/zsh-peco-history.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-peco-history
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # 3. Backup .zshrc and replace it with new one
 mv ~/.zshrc ~/.zshrc_backup;
