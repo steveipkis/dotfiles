@@ -35,11 +35,11 @@ cp -r .config/nvim ~/.config/.;
 
 ENV NODE_VERSION=16.13.0;
 
-brew uninstall --force node 
-brew uninstall --ignore-dependencies node 
+brew uninstall --force node
+brew uninstall --ignore-dependencies node
 
-brew update 
-brew install nvm 
+brew update
+brew install nvm
 
 mkdir -p ~/.nvm
 source $(brew --prefix nvm)/nvm.sh
@@ -64,7 +64,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 
 # 2. Copy over the custom oh my-zsh-configurations
 mkdir -p ~/.oh-my-zsh
-cp -r .oh-my-zsh/custom ~/.oh-my-zsh/.;
+cp -r .oh_my_zsh/custom ~/.oh-my-zsh/.;
 
 # 3. Backup .zshrc and replace it with new one
 mv ~/.zshrc ~/.zshrc_backup;
