@@ -17,7 +17,7 @@ RUN apt-get install -y nodejs
 COPY config /root/.config
 
 # Install vim-plug for plugin management
-RUN sh -c 'curl -fLo /root/.config/nvim/site/autoload/plug.vim --create-dirs \
+RUN sh -c 'curl -fLo /root/.config/nvim/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 WORKDIR app
