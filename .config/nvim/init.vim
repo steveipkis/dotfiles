@@ -18,11 +18,10 @@ set ignorecase							" Ignoring case in a pattern
 set iskeyword+=-						" treat dash separated words as a word text object"
 set number                              " Line numbers
 set numberwidth=4
-set relativenumber                      " Displays the relative line number based on cursor
 set scrolloff=8                         " Ensures that when scrolling the cursor doesn't reach the end of the page
+set sidescrolloff=8                     " Ensures that when scrolling the cursor doesn't reach the end of the page
 set shiftwidth=4                        " Change the number of space characters inserted for indentation
 set showtabline=4                       " Always show tabs
-set sidescrolloff=8                     " Ensures that when scrolling the cursor doesn't reach the end of the page
 set smartcase							" If capital letters are in pattern, becomes case sensitive
 set smartindent                         " Makes indenting smart
 set expandtab                           " Converts tabs to spaces
@@ -48,6 +47,21 @@ set signcolumn=yes
 set shortmess+=c
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+
+" -------------------------------------------------------------------------------------------
+" Disable Unused Standard Plugins
+" -------------------------------------------------------------------------------------------
+
+let g:loaded_rrhelper          = 1
+let g:loaded_tarPlugin         = 1
+let g:loaded_gzip              = 1
+let g:loaded_zipPlugin         = 1
+let g:loaded_2html_plugin      = 1
+let g:loaded_shada_plugin      = 1
+let g:loaded_spellfile_plugin  = 1
+let g:loaded_tutor_mode_plugin = 1
+let g:loaded_remote_plugins    = 1
+
 " -------------------------------------------------------------------------------------------
 "  Key Maps
 " -------------------------------------------------------------------------------------------
@@ -90,30 +104,33 @@ nnoremap <tab> :bnext<cr>
 " SHIFT-TAB will go back
 nnoremap <s-tab> :bprevious<cr>
 
+" Move across wrapped lines like regular lines
+noremap 0 ^
+" Just in case you need to go to the very beginning of a line
+noremap ^ 0
+
 " -------------------------------------------------------------------------------------------
 "  Plugins
 " -------------------------------------------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 
 source ~/.config/nvim/plugged/airline.vim
-source ~/.config/nvim/plugged/autopairs.vim
-source ~/.config/nvim/plugged/blame.vim
 source ~/.config/nvim/plugged/better_whitespace.vim
 source ~/.config/nvim/plugged/coc_tools.vim
 source ~/.config/nvim/plugged/cokeline.vim
 source ~/.config/nvim/plugged/commentary.vim
 source ~/.config/nvim/plugged/easyalign.vim
-source ~/.config/nvim/plugged/easymotion.vim
-source ~/.config/nvim/plugged/floaterm.vim
 source ~/.config/nvim/plugged/fzf_tools.vim
+source ~/.config/nvim/plugged/hop.vim
 source ~/.config/nvim/plugged/illuminate.vim
-source ~/.config/nvim/plugged/multiline.vim
+source ~/.config/nvim/plugged/impatient.vim
 source ~/.config/nvim/plugged/oceanic.vim
-source ~/.config/nvim/plugged/polyglot.vim
-source ~/.config/nvim/plugged/qscope.vim
+source ~/.config/nvim/plugged/netrw.vim
 source ~/.config/nvim/plugged/replace_with_register.vim
 source ~/.config/nvim/plugged/rooter.vim
+source ~/.config/nvim/plugged/startify.vim
 source ~/.config/nvim/plugged/surround.vim
+source ~/.config/nvim/plugged/treesitter.vim
 source ~/.config/nvim/plugged/vimsignature.vim
 source ~/.config/nvim/plugged/vimtargets.vim
 
@@ -167,3 +184,38 @@ EOF
 " -------------------------------------------------------------------------------------------
 "  Miscellaneous
 " -------------------------------------------------------------------------------------------
+
+"- Configuration for tree sitter
+lua << EOF
+  require('nvim-treesitter.configs').setup({
+    highlight = {
+      ensure_installed="all",
+      auto_install = true,
+      enable = true,
+      additional_vim_regex_highlighting = false,
+      },
+  })
+EOF
+
+"- Configuration for hop.nvim
+lua << EOF
+  require('hop').setup({
+    case_insensitive = false,
+    create_hl_autocmd = true,
+  })
+EOF
+
+" - Configuration for impatient
+lua << EOF
+  _G.__luacache_config = {
+    chunks = {
+      enable = true,
+      path = '~/.config/nvim/cache/luacache_chunks',
+    },
+    modpaths = {
+      enable = true,
+      path = '~/.config/nvim/cache/luacache_modpaths',
+    }
+  }
+  require('impatient')
+EOF

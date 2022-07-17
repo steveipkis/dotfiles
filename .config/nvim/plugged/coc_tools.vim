@@ -9,6 +9,7 @@ let g:coc_global_extensions = [
             \ 'coc-json',
             \ 'coc-lightbulb',
             \ 'coc-metals',
+            \ 'coc-pairs',
             \ 'coc-pyright',
             \ 'coc-sql',
             \ 'coc-tabnine',
