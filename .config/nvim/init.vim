@@ -143,6 +143,44 @@ call plug#end()
 colorscheme OceanicNext
 let g:airline_theme='oceanicnext'
 
+" -------------------------------------------------------------------------------------------
+"  Miscellaneous
+" -------------------------------------------------------------------------------------------
+
+" - Configuration for impatient
+lua << EOF
+  _G.__luacache_config = {
+    chunks = {
+      enable = true,
+    },
+    modpaths = {
+      enable = true,
+    }
+  }
+  require('impatient')
+EOF
+
+"- Configuration for tree sitter
+lua << EOF
+  require('nvim-treesitter.configs').setup({
+    highlight = {
+      ensure_installed="all",
+      auto_install = true,
+      enable = true,
+      additional_vim_regex_highlighting = false,
+      },
+  })
+EOF
+
+"- Configuration for hop.nvim
+lua << EOF
+  require('hop').setup({
+    case_insensitive = false,
+    create_hl_autocmd = true,
+  })
+EOF
+
+"- Cokeline setup
 lua << EOF
     local get_hex = require('cokeline/utils').get_hex
 
@@ -179,43 +217,4 @@ lua << EOF
         },
       },
     })
-EOF
-
-" -------------------------------------------------------------------------------------------
-"  Miscellaneous
-" -------------------------------------------------------------------------------------------
-
-"- Configuration for tree sitter
-lua << EOF
-  require('nvim-treesitter.configs').setup({
-    highlight = {
-      ensure_installed="all",
-      auto_install = true,
-      enable = true,
-      additional_vim_regex_highlighting = false,
-      },
-  })
-EOF
-
-"- Configuration for hop.nvim
-lua << EOF
-  require('hop').setup({
-    case_insensitive = false,
-    create_hl_autocmd = true,
-  })
-EOF
-
-" - Configuration for impatient
-lua << EOF
-  _G.__luacache_config = {
-    chunks = {
-      enable = true,
-      path = '~/.config/nvim/cache/luacache_chunks',
-    },
-    modpaths = {
-      enable = true,
-      path = '~/.config/nvim/cache/luacache_modpaths',
-    }
-  }
-  require('impatient')
 EOF
