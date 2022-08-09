@@ -52,15 +52,27 @@ au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm al
 " Disable Unused Standard Plugins
 " -------------------------------------------------------------------------------------------
 
-let g:loaded_rrhelper          = 1
-let g:loaded_tarPlugin         = 1
-let g:loaded_gzip              = 1
-let g:loaded_zipPlugin         = 1
-let g:loaded_2html_plugin      = 1
 let g:loaded_shada_plugin      = 1
 let g:loaded_spellfile_plugin  = 1
 let g:loaded_tutor_mode_plugin = 1
 let g:loaded_remote_plugins    = 1
+
+let g:loaded_gzip = 1
+let g:loaded_tar = 1
+let g:loaded_tarPlugin = 1
+let g:loaded_zip = 1
+let g:loaded_zipPlugin = 1
+
+let g:loaded_getscript = 1
+let g:loaded_getscriptPlugin = 1
+let g:loaded_vimball = 1
+let g:loaded_vimballPlugin = 1
+
+let g:loaded_matchit = 1
+let g:loaded_matchparen = 1
+let g:loaded_2html_plugin = 1
+let g:loaded_logiPat = 1
+let g:loaded_rrhelper = 1
 
 " -------------------------------------------------------------------------------------------
 "  Key Maps
@@ -84,8 +96,8 @@ nmap gb <C-n>
 xmap gb <C-n>
 
 " Use alt + hjkl to resize windows (Alt needs to be remapped in iTerm2)
-nnoremap <m-j> :resize -2<cr>
-nnoremap <m-k> :resize +2<cr>
+nnoremap <m-k> :resize -2<cr>
+nnoremap <m-j> :resize +2<cr>
 nnoremap <m-h> :vertical resize -2<cr>
 nnoremap <m-l> :vertical resize +2<cr>
 

@@ -2,7 +2,7 @@
 "  Plugins
 " -------------------------------------------------------------------------------------------
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'v0.0.81'}
 
 let g:coc_global_extensions = [
             \ 'coc-docker',
@@ -17,7 +17,7 @@ let g:coc_global_extensions = [
             \ ]
 
 " -------------------------------------------------------------------------------------------
-"  Functions 
+"  Functions
 " -------------------------------------------------------------------------------------------
 
 function! CheckBackspace() abort
