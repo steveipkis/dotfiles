@@ -1,4 +1,5 @@
 Plug 'vim-airline/vim-airline'
+Plug 'kyazdani42/nvim-web-devicons'
 
 ""-- Disable vim-airline integration:
 let g:airline#extensions#coc#enabled = 0
@@ -16,6 +17,6 @@ let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
 let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
 
 ""-- Enable Tabline
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#formatter = 'unique_tail'
-" let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline_powerline_fonts = 1

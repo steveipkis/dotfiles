@@ -35,7 +35,6 @@ set timeoutlen=500                      " By default timeoutlen is 1000 ms
 set undodir=~/.config/nvim/undodir      " Keeps an undo file where tracks changes made
 set undofile                            " Keeps an undo file where tracks changes made
 
-
 "-- Coc Specific Settings
 set nobackup                            " coc requirement
 set nowritebackup                       " coc requirement
@@ -43,10 +42,18 @@ set cmdheight=2
 set updatetime=300                      " Faster completion
 set signcolumn=yes
 
+"-- Treesitter code folding
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=99
+
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
 au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+
+" In order to treat Jenkinsfile as groovy
+autocmd BufRead,BufNewFile Jenkinsfile set filetype=groovy
 
 " -------------------------------------------------------------------------------------------
 " Disable Unused Standard Plugins
@@ -129,31 +136,46 @@ call plug#begin('~/.config/nvim/plugged')
 source ~/.config/nvim/plugged/airline.vim
 source ~/.config/nvim/plugged/better_whitespace.vim
 source ~/.config/nvim/plugged/coc_tools.vim
-source ~/.config/nvim/plugged/cokeline.vim
+" source ~/.config/nvim/plugged/cokeline.vim
 source ~/.config/nvim/plugged/commentary.vim
-source ~/.config/nvim/plugged/easyalign.vim
+" source ~/.config/nvim/plugged/easyalign.vim
 source ~/.config/nvim/plugged/fzf_tools.vim
 source ~/.config/nvim/plugged/hop.vim
 source ~/.config/nvim/plugged/illuminate.vim
 source ~/.config/nvim/plugged/impatient.vim
-source ~/.config/nvim/plugged/oceanic.vim
-source ~/.config/nvim/plugged/netrw.vim
+source ~/.config/nvim/plugged/nvim_tree.vim
 source ~/.config/nvim/plugged/replace_with_register.vim
 source ~/.config/nvim/plugged/rooter.vim
 source ~/.config/nvim/plugged/startify.vim
 source ~/.config/nvim/plugged/surround.vim
+source ~/.config/nvim/plugged/themes.vim
 source ~/.config/nvim/plugged/treesitter.vim
-source ~/.config/nvim/plugged/vimsignature.vim
+" source ~/.config/nvim/plugged/vimsignature.vim
 source ~/.config/nvim/plugged/vimtargets.vim
 
 call plug#end()
 
 " -------------------------------------------------------------------------------------------
-"  Color Scheme
+"  Color Scheme (Available in themes.vim)
 " -------------------------------------------------------------------------------------------
 
-colorscheme OceanicNext
-let g:airline_theme='oceanicnext'
+" colorscheme dracula
+" let g:one_allow_italics = 1
+" let g:airline_theme='dracula'
+
+" colorscheme ghdark
+" let g:one_allow_italics = 1
+" let g:airline_theme='ghdark'
+
+" colorscheme OceanicNext
+" let g:one_allow_italics = 1
+" let g:airline_theme='oceanicnext'
+" let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
+
+colorscheme night-owl
+let g:one_allow_italics = 1
+let g:airline_theme='dracula'
 
 " -------------------------------------------------------------------------------------------
 "  Miscellaneous
@@ -184,6 +206,19 @@ lua << EOF
   })
 EOF
 
+"- Configuration for nvim-comment
+lua << EOF
+  require('nvim_comment').setup({
+    marker_padding = true,
+    comment_empty = true,
+    comment_empty_trim_whitespace = true,
+    create_mappings = true,
+    line_mapping = "gcc",
+    operator_mapping = "gc",
+    comment_chunk_text_object = "ic",
+  })
+EOF
+
 "- Configuration for hop.nvim
 lua << EOF
   require('hop').setup({
@@ -192,40 +227,33 @@ lua << EOF
   })
 EOF
 
-"- Cokeline setup
+"- NvimTree Setup
 lua << EOF
-    local get_hex = require('cokeline/utils').get_hex
-
-    require('cokeline').setup({
-      default_hl = {
-        fg = function(buffer)
-          return
-            buffer.is_focused
-            and get_hex('Normal', 'fg')
-             or get_hex('Comment', 'fg')
-        end,
-        bg = 'NONE',
+    require("nvim-tree").setup({
+      disable_netrw = false,
+      hijack_netrw = true,
+      sort_by = "case_sensitive",
+      view = {
+        adaptive_size = true,
+        mappings = {
+          list = {
+            { key = "u", action = "dir_up" },
+          },
+        },
       },
-
-      components = {
-        {
-          text = function(buffer) return (buffer.index ~= 1) and '▏' or '' end,
-          fg = get_hex('Normal', 'fg')
-        },
-        {
-          text = function(buffer) return '    ' .. buffer.devicon.icon end,
-          fg = function(buffer) return buffer.devicon.color end,
-        },
-        {
-          text = function(buffer) return buffer.filename .. '    ' end,
-          style = function(buffer) return buffer.is_focused and 'bold' or nil end,
-        },
-        {
-          text = '',
-          delete_buffer_on_left_click = true,
-        },
-        {
-          text = '  ',
+      renderer = {
+        group_empty = true,
+      },
+      filters = {
+        dotfiles = false,
+        custom = {"venv", ".venv"},
+      },
+      git = {
+        enable = false,
+      },
+      actions = {
+        open_file = {
+          quit_on_open = true,
         },
       },
     })
