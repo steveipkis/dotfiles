@@ -4,7 +4,7 @@
 xcode-select -–install;
 
 # Now we'll need to install Homebrew in order to install packages
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 ############################################################
 # Next install brew dependencies
@@ -21,6 +21,14 @@ brew install bat \
     pyenv \
     the_silver_searcher \
     zoxide
+
+############################################################
+# Install GNU bash and add to allowed shells list
+############################################################
+
+# https://stackoverflow.com/questions/10574969/how-do-i-install-bash-3-2-25-on-mac-os-x-10-5-8
+brew install bash
+echo '/usr/local/bin/bash' | sudo tee -a /etc/shells;
 
 ############################################################
 # Copy the nvim configuration file
