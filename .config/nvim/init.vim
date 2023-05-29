@@ -94,6 +94,12 @@ map gf :edit <cfile><cr>
 " To make file searching easier
 nmap <leader>z :Files<cr>
 
+" Execute current line in bash
+nmap <leader>x :exec '!'.getline('.')<cr>
+
+" Execute current line in bash and write output to File
+nmap <leader>X :exec 'r!'.getline('.')<CR>
+
 " Reselect visual selection after indenting
 vnoremap < <gv
 vnoremap > >gv
@@ -118,11 +124,13 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-" TAB in general mode will move to text buffer
+" TAB in general mode will move to next buffer
 nnoremap <tab> :bnext<cr>
 " SHIFT-TAB will go back
 nnoremap <s-tab> :bprevious<cr>
 
+" Send char deletes to black hole, not worth saving
+nnoremap x "_x
 " Move across wrapped lines like regular lines
 noremap 0 ^
 " Just in case you need to go to the very beginning of a line
@@ -136,7 +144,7 @@ call plug#begin('~/.config/nvim/plugged')
 source ~/.config/nvim/plugged/airline.vim
 source ~/.config/nvim/plugged/better_whitespace.vim
 source ~/.config/nvim/plugged/coc_tools.vim
-" source ~/.config/nvim/plugged/cokeline.vim
+source ~/.config/nvim/plugged/cokeline.vim
 source ~/.config/nvim/plugged/commentary.vim
 " source ~/.config/nvim/plugged/easyalign.vim
 source ~/.config/nvim/plugged/fzf_tools.vim
@@ -156,53 +164,125 @@ source ~/.config/nvim/plugged/vimtargets.vim
 call plug#end()
 
 " -------------------------------------------------------------------------------------------
-"  Color Scheme (Available in themes.vim)
+"  Color Schemes I like (Available in themes.vim)
 " -------------------------------------------------------------------------------------------
 
-" colorscheme dracula
-" let g:one_allow_italics = 1
-" let g:airline_theme='dracula'
+colorscheme dracula
+let g:airline_theme='dracula'
+let g:one_allow_italics = 1
 
-" colorscheme ghdark
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark='hard'
 " let g:one_allow_italics = 1
-" let g:airline_theme='ghdark'
+" let g:airline_theme='gruvbox'
 
 " colorscheme OceanicNext
-" let g:one_allow_italics = 1
 " let g:airline_theme='oceanicnext'
+" let g:one_allow_italics = 1
 " let g:oceanic_next_terminal_bold = 1
 " let g:oceanic_next_terminal_italic = 1
 
-colorscheme night-owl
-let g:one_allow_italics = 1
-let g:airline_theme='dracula'
+" colorscheme night-owl
+" let g:one_allow_italics = 1
+" let g:airline_theme='dracula'
 
 " -------------------------------------------------------------------------------------------
-"  Miscellaneous
+"  Lua Configurations
 " -------------------------------------------------------------------------------------------
+
+"- Configuration for illuminate which should not be lazily loaded
+lua << EOF
+    require('illuminate').configure({
+        -- providers: provider used to get references in the buffer, ordered by priority
+        providers = {
+            'treesitter',
+        },
+        -- delay: delay in milliseconds
+        delay = 0,
+        -- under_cursor: whether or not to illuminate under the cursor
+        under_cursor = true,
+        -- large_file_cutoff: number of lines at which to use large_file_config
+        -- The `under_cursor` option is disabled when this cutoff is hit
+        large_file_cutoff = nil,
+        -- large_file_config: config to use for large files (based on large_file_cutoff).
+        -- Supports the same keys passed to .configure
+        -- If nil, vim-illuminate will be disabled for large files.
+        large_file_overrides = nil,
+        -- min_count_to_highlight: minimum number of matches required to perform highlighting
+        min_count_to_highlight = 1,
+    })
+EOF
+
+"-- Vim Illuminate Settings to use highlighing instead of underline
+highlight link IlluminatedWordText CursorLine
+highlight link IlluminatedWordRead CursorLine
+highlight link IlluminatedWordWrite CursorLine
 
 " - Configuration for impatient
 lua << EOF
   _G.__luacache_config = {
     chunks = {
       enable = true,
+      path = '/Users/hnadeem/.config/nvim/cache/luacache_chunks',
     },
     modpaths = {
       enable = true,
+      path = '/Users/hnadeem/.config/nvim/cache/luacache_modpaths',
     }
   }
   require('impatient')
 EOF
 
+"- Cokeline setup
+lua << EOF
+    local get_hex = require('cokeline/utils').get_hex
+
+    require('cokeline').setup({
+      default_hl = {
+        fg = function(buffer)
+          return
+            buffer.is_focused
+            and get_hex('Normal', 'fg')
+             or get_hex('Comment', 'fg')
+        end,
+        bg = 'NONE',
+      },
+
+      components = {
+        {
+          text = function(buffer) return (buffer.index ~= 1) and '▏' or '' end,
+          fg = get_hex('Normal', 'fg')
+        },
+        {
+          text = function(buffer) return '    ' .. buffer.devicon.icon end,
+          fg = function(buffer) return buffer.devicon.color end,
+        },
+        {
+          text = function(buffer) return buffer.filename .. '    ' end,
+          style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+        },
+        {
+          text = '',
+          delete_buffer_on_left_click = true,
+        },
+        {
+          text = '  ',
+        },
+      },
+    })
+EOF
+
+
 "- Configuration for tree sitter
 lua << EOF
   require('nvim-treesitter.configs').setup({
     highlight = {
-      ensure_installed="all",
+      ensure_installed = "all",
+      ignore_install = { "lua", "wgsl" },
       auto_install = true,
       enable = true,
       additional_vim_regex_highlighting = false,
-      },
+    },
   })
 EOF
 
@@ -235,11 +315,6 @@ lua << EOF
       sort_by = "case_sensitive",
       view = {
         adaptive_size = true,
-        mappings = {
-          list = {
-            { key = "u", action = "dir_up" },
-          },
-        },
       },
       renderer = {
         group_empty = true,
@@ -247,9 +322,6 @@ lua << EOF
       filters = {
         dotfiles = false,
         custom = {"venv", ".venv"},
-      },
-      git = {
-        enable = false,
       },
       actions = {
         open_file = {
