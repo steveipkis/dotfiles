@@ -141,16 +141,15 @@ noremap ^ 0
 " -------------------------------------------------------------------------------------------
 call plug#begin('~/.config/nvim/plugged')
 
-source ~/.config/nvim/plugged/airline.vim
 source ~/.config/nvim/plugged/better_whitespace.vim
 source ~/.config/nvim/plugged/coc_tools.vim
 source ~/.config/nvim/plugged/cokeline.vim
 source ~/.config/nvim/plugged/commentary.vim
-" source ~/.config/nvim/plugged/easyalign.vim
 source ~/.config/nvim/plugged/fzf_tools.vim
 source ~/.config/nvim/plugged/hop.vim
 source ~/.config/nvim/plugged/illuminate.vim
 source ~/.config/nvim/plugged/impatient.vim
+source ~/.config/nvim/plugged/lualine.vim
 source ~/.config/nvim/plugged/nvim_tree.vim
 source ~/.config/nvim/plugged/replace_with_register.vim
 source ~/.config/nvim/plugged/rooter.vim
@@ -168,23 +167,19 @@ call plug#end()
 " -------------------------------------------------------------------------------------------
 
 colorscheme dracula
-let g:airline_theme='dracula'
 let g:one_allow_italics = 1
 
 " colorscheme gruvbox
 " let g:gruvbox_contrast_dark='hard'
 " let g:one_allow_italics = 1
-" let g:airline_theme='gruvbox'
 
 " colorscheme OceanicNext
-" let g:airline_theme='oceanicnext'
 " let g:one_allow_italics = 1
 " let g:oceanic_next_terminal_bold = 1
 " let g:oceanic_next_terminal_italic = 1
 
 " colorscheme night-owl
 " let g:one_allow_italics = 1
-" let g:airline_theme='dracula'
 
 " -------------------------------------------------------------------------------------------
 "  Lua Configurations
@@ -238,40 +233,96 @@ lua << EOF
     local get_hex = require('cokeline/utils').get_hex
 
     require('cokeline').setup({
-      default_hl = {
-        fg = function(buffer)
+       default_hl = {
+          fg = function(buffer)
           return
-            buffer.is_focused
-            and get_hex('Normal', 'fg')
-             or get_hex('Comment', 'fg')
-        end,
-        bg = 'NONE',
-      },
+          buffer.is_focused
+          and get_hex('Normal', 'fg')
+          or get_hex('Comment', 'fg')
+          end,
+          bg = get_hex('ColorColumn', 'bg'),
+       },
 
-      components = {
-        {
-          text = function(buffer) return (buffer.index ~= 1) and '▏' or '' end,
-          fg = get_hex('Normal', 'fg')
-        },
-        {
-          text = function(buffer) return '    ' .. buffer.devicon.icon end,
-          fg = function(buffer) return buffer.devicon.color end,
-        },
-        {
-          text = function(buffer) return buffer.filename .. '    ' end,
-          style = function(buffer) return buffer.is_focused and 'bold' or nil end,
-        },
-        {
-          text = '',
-          delete_buffer_on_left_click = true,
-        },
-        {
-          text = '  ',
-        },
-      },
+       sidebar = {
+          filetype = 'NvimTree',
+          components = {
+             {
+                text = '  File Explorer',
+                fg = yellow,
+                bg = get_hex('NvimTreeNormal', 'bg'),
+                style = 'bold',
+             },
+          }
+       },
+
+       components = {
+          {
+             text = ' ',
+             bg = get_hex('Normal', 'bg'),
+          },
+          {
+             text = '',
+             fg = get_hex('ColorColumn', 'bg'),
+             bg = get_hex('Normal', 'bg'),
+          },
+          {
+             text = function(buffer)
+             return buffer.devicon.icon
+             end,
+             fg = function(buffer)
+             return buffer.devicon.color
+             end,
+          },
+          {
+             text = ' ',
+          },
+          {
+             text = function(buffer) return buffer.filename .. '  ' end,
+             style = function(buffer)
+             return buffer.is_focused and 'bold' or nil
+             end,
+          },
+          {
+             text = '',
+             delete_buffer_on_left_click = true,
+          },
+          {
+             text = '',
+             fg = get_hex('ColorColumn', 'bg'),
+             bg = get_hex('Normal', 'bg'),
+          },
+       },
     })
 EOF
 
+"- Configuration for lualine
+lua << EOF
+  require('lualine').setup({
+     options = {
+        theme = 'auto'
+     },
+     extensions = {'fzf', 'nvim-tree'}
+  })
+EOF
+
+"- Configuration for fzf
+lua << EOF
+    require('fzf-lua').setup({
+       "telescope",
+       winopts={
+          hl = { border = "FloatBorder", },
+          preview={ default="bat" }
+       },
+       files = {
+          git_icons = false,
+          file_icons = true,
+       },
+       grep = {
+          rg_opts = "--sort-files --hidden --column --line-number --no-heading " ..
+                    "--color=always --smart-case -g '!{.git,node_modules}/*'",
+       }
+    })
+EOF
 
 "- Configuration for tree sitter
 lua << EOF
