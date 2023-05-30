@@ -1,5 +1,5 @@
 gitrelease() {
-	VERSION=$1;	
+	VERSION=$1;
 	git fetch &> /dev/null;
 	curr="${VERSION:-$(git describe --tags --abbrev=0 @)}";
 	prev=$(git describe --tags --abbrev=0 $curr^);

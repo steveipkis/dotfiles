@@ -92,7 +92,8 @@ command! Vimedit edit $MYVIMRC
 map gf :edit <cfile><cr>
 
 " To make file searching easier
-nmap <leader>z :Files<cr>
+" nmap <leader>z :Files<cr>
+nmap <leader>z <cmd>lua require('fzf-lua').files()<CR>
 
 " Execute current line in bash
 nmap <leader>x :exec '!'.getline('.')<cr>
@@ -166,46 +167,29 @@ call plug#end()
 "  Color Schemes I like (Available in themes.vim)
 " -------------------------------------------------------------------------------------------
 
-colorscheme dracula
 let g:one_allow_italics = 1
+
+colorscheme bluloco-dark
+
+" colorscheme dracula
 
 " colorscheme gruvbox
 " let g:gruvbox_contrast_dark='hard'
-" let g:one_allow_italics = 1
 
 " colorscheme OceanicNext
-" let g:one_allow_italics = 1
 " let g:oceanic_next_terminal_bold = 1
 " let g:oceanic_next_terminal_italic = 1
 
 " colorscheme night-owl
-" let g:one_allow_italics = 1
 
 " -------------------------------------------------------------------------------------------
 "  Lua Configurations
 " -------------------------------------------------------------------------------------------
 
-"- Configuration for illuminate which should not be lazily loaded
+"- Configuration for illuminate should not be lazily loaded
 lua << EOF
-    require('illuminate').configure({
-        -- providers: provider used to get references in the buffer, ordered by priority
-        providers = {
-            'treesitter',
-        },
-        -- delay: delay in milliseconds
-        delay = 0,
-        -- under_cursor: whether or not to illuminate under the cursor
-        under_cursor = true,
-        -- large_file_cutoff: number of lines at which to use large_file_config
-        -- The `under_cursor` option is disabled when this cutoff is hit
-        large_file_cutoff = nil,
-        -- large_file_config: config to use for large files (based on large_file_cutoff).
-        -- Supports the same keys passed to .configure
-        -- If nil, vim-illuminate will be disabled for large files.
-        large_file_overrides = nil,
-        -- min_count_to_highlight: minimum number of matches required to perform highlighting
-        min_count_to_highlight = 1,
-    })
+require('treesitter')       -- ./lua/treesitter.lua
+require('word_illuminate')  -- ./lua/word_illuminate.lua
 EOF
 
 "-- Vim Illuminate Settings to use highlighing instead of underline
@@ -213,171 +197,28 @@ highlight link IlluminatedWordText CursorLine
 highlight link IlluminatedWordRead CursorLine
 highlight link IlluminatedWordWrite CursorLine
 
-" - Configuration for impatient
+" - Configuration for impatient to lazy load our plugins
 lua << EOF
-  _G.__luacache_config = {
-    chunks = {
+_G.__luacache_config = {
+   chunks = {
       enable = true,
       path = '/Users/hnadeem/.config/nvim/cache/luacache_chunks',
-    },
-    modpaths = {
+   },
+   modpaths = {
       enable = true,
       path = '/Users/hnadeem/.config/nvim/cache/luacache_modpaths',
-    }
-  }
-  require('impatient')
+   }
+}
+require('impatient')
 EOF
 
-"- Cokeline setup
+" - All plugins below are lazily loaded
 lua << EOF
-    local get_hex = require('cokeline/utils').get_hex
-
-    require('cokeline').setup({
-       default_hl = {
-          fg = function(buffer)
-          return
-          buffer.is_focused
-          and get_hex('Normal', 'fg')
-          or get_hex('Comment', 'fg')
-          end,
-          bg = get_hex('ColorColumn', 'bg'),
-       },
-
-       sidebar = {
-          filetype = 'NvimTree',
-          components = {
-             {
-                text = '  File Explorer',
-                fg = yellow,
-                bg = get_hex('NvimTreeNormal', 'bg'),
-                style = 'bold',
-             },
-          }
-       },
-
-       components = {
-          {
-             text = ' ',
-             bg = get_hex('Normal', 'bg'),
-          },
-          {
-             text = '',
-             fg = get_hex('ColorColumn', 'bg'),
-             bg = get_hex('Normal', 'bg'),
-          },
-          {
-             text = function(buffer)
-             return buffer.devicon.icon
-             end,
-             fg = function(buffer)
-             return buffer.devicon.color
-             end,
-          },
-          {
-             text = ' ',
-          },
-          {
-             text = function(buffer) return buffer.filename .. '  ' end,
-             style = function(buffer)
-             return buffer.is_focused and 'bold' or nil
-             end,
-          },
-          {
-             text = '',
-             delete_buffer_on_left_click = true,
-          },
-          {
-             text = '',
-             fg = get_hex('ColorColumn', 'bg'),
-             bg = get_hex('Normal', 'bg'),
-          },
-       },
-    })
-EOF
-
-"- Configuration for lualine
-lua << EOF
-  require('lualine').setup({
-     options = {
-        theme = 'auto'
-     },
-     extensions = {'fzf', 'nvim-tree'}
-  })
-EOF
-
-"- Configuration for fzf
-lua << EOF
-    require('fzf-lua').setup({
-       "telescope",
-       winopts={
-          hl = { border = "FloatBorder", },
-          preview={ default="bat" }
-       },
-       files = {
-          git_icons = false,
-          file_icons = true,
-       },
-       grep = {
-          rg_opts = "--sort-files --hidden --column --line-number --no-heading " ..
-                    "--color=always --smart-case -g '!{.git,node_modules}/*'",
-       }
-    })
-EOF
-
-"- Configuration for tree sitter
-lua << EOF
-  require('nvim-treesitter.configs').setup({
-    highlight = {
-      ensure_installed = "all",
-      ignore_install = { "lua", "wgsl" },
-      auto_install = true,
-      enable = true,
-      additional_vim_regex_highlighting = false,
-    },
-  })
-EOF
-
-"- Configuration for nvim-comment
-lua << EOF
-  require('nvim_comment').setup({
-    marker_padding = true,
-    comment_empty = true,
-    comment_empty_trim_whitespace = true,
-    create_mappings = true,
-    line_mapping = "gcc",
-    operator_mapping = "gc",
-    comment_chunk_text_object = "ic",
-  })
-EOF
-
-"- Configuration for hop.nvim
-lua << EOF
-  require('hop').setup({
-    case_insensitive = false,
-    create_hl_autocmd = true,
-  })
-EOF
-
-"- NvimTree Setup
-lua << EOF
-    require("nvim-tree").setup({
-      disable_netrw = false,
-      hijack_netrw = true,
-      sort_by = "case_sensitive",
-      view = {
-        adaptive_size = true,
-      },
-      renderer = {
-        group_empty = true,
-      },
-      filters = {
-        dotfiles = false,
-        custom = {"venv", ".venv"},
-      },
-      actions = {
-        open_file = {
-          quit_on_open = true,
-        },
-      },
-    })
+require("nvim-surround").setup({})
+require('coke')         -- ./lua/coke.lua
+require('status_line')  -- ./lua/status_line.lua
+require('comment')      -- ./lua/comment.lua
+require('fzf_tools')    -- ./lua/fzf_tools.lua
+require('hopper')       -- ./lua/hopper.lua
+require('nvim_tree')    -- ./lua/nvim_tree.lua
 EOF

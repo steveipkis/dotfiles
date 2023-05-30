@@ -1,0 +1,8 @@
+#!/bin/bash
+
+ffs() {
+    echo -n "Enter the search word: "
+    read search_word
+
+    ag "$search_word" | cut -d ':' -f 1 | sort -u | fzf --header='['$(pwd)']' --preview 'bat --color=always --style=numbers --line-range=:500 {}'
+}
