@@ -135,11 +135,9 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
 
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
 "" Add (Neo)Vim's native statusline support
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" vim-airline integration is stored in  ~/.config/nvim/plugged/airline.vim
 
 " Mappings for CoCList
 " Show all diagnostics.

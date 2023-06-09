@@ -50,7 +50,8 @@ set foldlevel=99
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+" Auto source when writing to init.vm alternatively you can run :source $MYVIMRC
+au! BufWritePost $MYVIMRC source %
 
 " In order to treat Jenkinsfile as groovy
 autocmd BufRead,BufNewFile Jenkinsfile set filetype=groovy
@@ -91,15 +92,17 @@ command! Vimedit edit $MYVIMRC
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
 
-" To make file searching easier
-" nmap <leader>z :Files<cr>
-nmap <leader>z <cmd>lua require('fzf-lua').files()<CR>
+" Map <Esc> key to silently clear search highlighting
+nnoremap <silent> <Esc> :silent! noh<CR>
 
 " Execute current line in bash
 nmap <leader>x :exec '!'.getline('.')<cr>
 
 " Execute current line in bash and write output to File
 nmap <leader>X :exec 'r!'.getline('.')<CR>
+
+" Replace-with-register alternative: don't copy the replaced text after pasting in visual mode
+xnoremap <silent> p p:let @+=@0<CR>:let @"=@0<CR>
 
 " Reselect visual selection after indenting
 vnoremap < <gv
@@ -150,9 +153,10 @@ source ~/.config/nvim/plugged/fzf_tools.vim
 source ~/.config/nvim/plugged/hop.vim
 source ~/.config/nvim/plugged/illuminate.vim
 source ~/.config/nvim/plugged/impatient.vim
+source ~/.config/nvim/plugged/indent.vim
 source ~/.config/nvim/plugged/lualine.vim
 source ~/.config/nvim/plugged/nvim_tree.vim
-source ~/.config/nvim/plugged/replace_with_register.vim
+source ~/.config/nvim/plugged/nv_term.vim
 source ~/.config/nvim/plugged/rooter.vim
 source ~/.config/nvim/plugged/startify.vim
 source ~/.config/nvim/plugged/surround.vim
@@ -169,9 +173,10 @@ call plug#end()
 
 let g:one_allow_italics = 1
 
-colorscheme bluloco-dark
+"- Slowest Color Scheme
+" colorscheme bluloco-dark
 
-" colorscheme dracula
+colorscheme dracula
 
 " colorscheme gruvbox
 " let g:gruvbox_contrast_dark='hard'
@@ -190,35 +195,16 @@ colorscheme bluloco-dark
 lua << EOF
 require('treesitter')       -- ./lua/treesitter.lua
 require('word_illuminate')  -- ./lua/word_illuminate.lua
-EOF
-
-"-- Vim Illuminate Settings to use highlighing instead of underline
-highlight link IlluminatedWordText CursorLine
-highlight link IlluminatedWordRead CursorLine
-highlight link IlluminatedWordWrite CursorLine
-
-" - Configuration for impatient to lazy load our plugins
-lua << EOF
-_G.__luacache_config = {
-   chunks = {
-      enable = true,
-      path = '/Users/hnadeem/.config/nvim/cache/luacache_chunks',
-   },
-   modpaths = {
-      enable = true,
-      path = '/Users/hnadeem/.config/nvim/cache/luacache_modpaths',
-   }
-}
-require('impatient')
-EOF
-
-" - All plugins below are lazily loaded
-lua << EOF
-require("nvim-surround").setup({})
+require('lazy_loader')      -- ./lua/lazy_loader.lua
+-- All Plugins Below are lazily loaded
+require('nvim-surround').setup({})
+require("nvterm").setup({})
 require('coke')         -- ./lua/coke.lua
-require('status_line')  -- ./lua/status_line.lua
 require('comment')      -- ./lua/comment.lua
 require('fzf_tools')    -- ./lua/fzf_tools.lua
 require('hopper')       -- ./lua/hopper.lua
+require('indent')       -- ./lua/indent.lua
 require('nvim_tree')    -- ./lua/nvim_tree.lua
+require('project')      -- ./lua/project.lua
+require('status_line')  -- ./lua/status_line.lua
 EOF

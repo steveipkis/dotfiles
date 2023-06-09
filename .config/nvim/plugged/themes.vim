@@ -12,3 +12,7 @@ Plug 'mhartington/oceanic-next'
 
 " Night owl
 Plug 'haishanh/night-owl.vim'
+
+" Bluloco
+" Plug 'rktjmp/lush.nvim'
+" Plug 'uloco/bluloco.nvim'

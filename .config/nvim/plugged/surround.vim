@@ -1,1 +1,1 @@
-Plug 'tpope/vim-surround'
+Plug 'kylechui/nvim-surround'

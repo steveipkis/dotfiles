@@ -15,6 +15,7 @@ This configuration entails:
 * [.oh-my-zsh/custom](.oh-my-zsh/custom): Custom packages that I use with my zsh configuration.
 * [.my_zsh_functions](.my_zsh_functions): Custom functions I wrote and loaded into the environment.
 * [.config/nvim](.config/nvim): this configures nvim to use fzf, ag and a bunch of plugins to make vim use easy.
+  * current setup supports nvim 0.8.2
 
 ## External Apps to Install
 
@@ -31,5 +32,5 @@ This configuration entails:
 Since your machine is usually configured with another github account, you can simply [create a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) and use that to commit changes to this repo.
 
 ```bash
-git push https://${GITHUB_API_TOKEN}@github.com/steveipkis/dotfiles.git
+git push https://steveipkis:${GITHUB_API_TOKEN}@github.com/steveipkis/dotfiles.git
 ```
