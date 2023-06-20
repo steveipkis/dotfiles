@@ -115,6 +115,7 @@ let g:startify_files_number = 12
 let g:startify_commands = [
         \ {'f': ['Search Files', 'Files']},
         \ {'d': ['Dot Files', 'Vimedit']},
-        \ {'up': ['Update Plugins', 'PlugUpdate']},
+        \ {'up': ['Update Plugins', 'PlugInstall | PlugUpdate']},
         \ {'ut': ['Update Treesitter', 'TSUpdate']},
+        \ {'t': ['Themes', 'lua require("fzf-lua").colorschemes()']},
         \ ]

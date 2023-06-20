@@ -3,7 +3,7 @@
 ##########################################################
 
 # On MacOS you may need to set CPPFLAGS="-I/usr/local/include -L/usr/local/lib" before
-# running pipenv install --dev for the python-snappy package to be installed 
+# running pipenv install --dev for the python-snappy package to be installed
 # per https://github.com/andrix/python-snappy#frequently-asked-questions
 CPPFLAGS="-I/usr/local/include -L/usr/local/lib"
 
@@ -51,7 +51,7 @@ alias vim="nvim"
 alias vi="nvim"
 
 alias ls="exa"
-alias ll="exa -alh"
+alias ll="exa -alh --group-directories-first"
 alias tree="exa --tree --git-ignore"
 alias cd="z"
 
@@ -59,6 +59,7 @@ alias gits="git status"
 alias gitbranch="git branch | peco | xargs git checkout"
 alias gitdelete="git branch | peco | xargs git branch -D"
 alias gitlog="git log --all --decorate --oneline --graph"
+alias gitstashdrop="git stash list | peco | grep -o '{[0-9]*}' | cut -d'{' -f2 | cut -d'}' -f1 | sort -ur | xargs -n 1 -I {} git stash drop stash@{{}}"
 alias gitreset="git reset --merge"
 
 alias python2="python"
@@ -70,6 +71,7 @@ alias bathelp='bat --plain --language=cmd-help'
 alias wh="EDITOR=nvim wh"
 alias pensieve="code ~/Code/personal/pensieve"
 
+alias loadup_time="nvim --startuptime /tmp/startup.log -c exit && tail -n 1 /tmp/startup.log"
 alias brewupgrade="brew outdated | xargs brew install"
 
 ##########################################################
@@ -92,6 +94,9 @@ fg() {
 # Installation Exports
 ##########################################################
 
+# setting up git to use nvim
+export GIT_EDITOR=nvim
+
 # setting up java and scala
 export JAVA_HOME=$(/usr/libexec/java_home)
 export PATH="~/Applications/homebrew/opt/openjdk@8/bin:$PATH"
@@ -99,7 +104,7 @@ export SCALA_HOME='~/Applications/homebrew/opt/scala@2.12'
 export PATH=$PATH:$SCALA_HOME/bin
 export PATH=$PATH:/opt/apache-maven/bin
 
-# setting up spark 
+# setting up spark
 export SPARK_HOME="~/Applications/spark/python"
 export PATH=$PATH:/usr/local/git/bin:$SPARK_HOME/bin
 
