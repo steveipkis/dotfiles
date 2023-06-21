@@ -89,7 +89,7 @@ nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 " Applying code actions to the selected code block
 " Example: `<leader>aap` for current paragraph

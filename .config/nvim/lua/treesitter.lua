@@ -39,6 +39,7 @@ local treesitter = require('nvim-treesitter.configs').setup({
       ignore_install = { "lua", "wgsl" },
       auto_install = true,
       enable = true,
+      disable = { "txt", "md" },
       additional_vim_regex_highlighting = false,
    },
 })

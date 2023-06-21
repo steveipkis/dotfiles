@@ -1,18 +1,16 @@
+" -------------------------------------------------------------------------------------------
 " Shared with all themes
+" -------------------------------------------------------------------------------------------
 Plug 'ryanoasis/vim-devicons'
 
-" Dracula
-Plug 'dracula/vim', { 'as': 'dracula' }
+" -------------------------------------------------------------------------------------------
+" Themes
+" -------------------------------------------------------------------------------------------
 
-" Gruvbox
-Plug 'morhetz/gruvbox'
-
-" Oceanic
+" Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'haishanh/night-owl.vim'
 Plug 'mhartington/oceanic-next'
-
-" Night owl
-Plug 'haishanh/night-owl.vim'
-
-" Bluloco
-" Plug 'rktjmp/lush.nvim'
+" Plug 'morhetz/gruvbox'
+" Plug 'rktjmp/lush.nvim'     "- Needed for bluloco
 " Plug 'uloco/bluloco.nvim'

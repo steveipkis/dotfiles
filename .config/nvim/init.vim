@@ -154,6 +154,7 @@ source ~/.config/nvim/plugged/hop.vim
 source ~/.config/nvim/plugged/illuminate.vim
 source ~/.config/nvim/plugged/impatient.vim
 source ~/.config/nvim/plugged/indent.vim
+source ~/.config/nvim/plugged/key.vim
 source ~/.config/nvim/plugged/lualine.vim
 source ~/.config/nvim/plugged/nvim_tree.vim
 source ~/.config/nvim/plugged/nv_term.vim
@@ -195,16 +196,17 @@ colorscheme dracula
 lua << EOF
 require('treesitter')       -- ./lua/treesitter.lua
 require('word_illuminate')  -- ./lua/word_illuminate.lua
+require('project')          -- ./lua/project.lua
 require('lazy_loader')      -- ./lua/lazy_loader.lua
 -- All Plugins Below are lazily loaded
 require('nvim-surround').setup({})
 require("nvterm").setup({})
-require('coke')         -- ./lua/coke.lua
-require('comment')      -- ./lua/comment.lua
-require('fzf_tools')    -- ./lua/fzf_tools.lua
-require('hopper')       -- ./lua/hopper.lua
-require('indent')       -- ./lua/indent.lua
-require('nvim_tree')    -- ./lua/nvim_tree.lua
-require('project')      -- ./lua/project.lua
-require('status_line')  -- ./lua/status_line.lua
+require('coke')             -- ./lua/coke.lua
+require('comment')          -- ./lua/comment.lua
+require('fzf_tools')        -- ./lua/fzf_tools.lua
+require('hopper')           -- ./lua/hopper.lua
+require('indent')           -- ./lua/indent.lua
+require('key')              -- ./lua/key.lua
+require('nvim_tree')        -- ./lua/nvim_tree.lua
+require('status_line')      -- ./lua/status_line.lua
 EOF
