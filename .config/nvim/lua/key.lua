@@ -12,6 +12,7 @@ local key = require('which-key')
 -------------------------------------------------------------------
 
 key.register({
+    e = { "File Explorer" },
     a = {
         name = "Code Action",
         c = { "Cursor" },
@@ -41,6 +42,20 @@ key.register({
         b = { "Hop Backward to Word" },
         j = { "Hop Down to Word" },
         k = { "Hop Up to Word" },
+    },
+    g = {
+        name = "Git",
+        b = "Git Branches",
+        s = "Git Status",
+        c = "Git Commit Log (Project)",
+        u = "Git Commit Log (Buffer)",
+        t = "Git Stash",
+    },
+    f = {
+        name = "Find",
+        f = "Find Files",
+        w = "Find Word",
+        g = "File Grep",
     }
 }, { prefix = "<leader>" })
 

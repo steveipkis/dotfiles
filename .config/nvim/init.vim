@@ -31,7 +31,7 @@ set tabstop=4                           " Insert 4 spaces for a tab
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
 set termguicolors                       " Support 256 colors
-set timeoutlen=500                      " By default timeoutlen is 1000 ms
+set timeoutlen=400                      " By default timeoutlen is 1000 ms
 set undodir=~/.config/nvim/undodir      " Keeps an undo file where tracks changes made
 set undofile                            " Keeps an undo file where tracks changes made
 
@@ -39,7 +39,7 @@ set undofile                            " Keeps an undo file where tracks change
 set nobackup                            " coc requirement
 set nowritebackup                       " coc requirement
 set cmdheight=2
-set updatetime=300                      " Faster completion
+set updatetime=250                      " Faster completion
 set signcolumn=yes
 
 "-- Treesitter code folding
