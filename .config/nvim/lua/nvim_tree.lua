@@ -2,6 +2,10 @@ local nvim_tree = require("nvim-tree").setup({
    disable_netrw = false,
    hijack_netrw = true,
    sort_by = "case_sensitive",
+   git = {
+     enable = true,
+     ignore = true,
+   },
    view = {
       adaptive_size = true,
    },

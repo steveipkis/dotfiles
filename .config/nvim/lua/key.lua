@@ -56,6 +56,7 @@ key.register({
         f = "Find Files",
         w = "Find Word",
         g = "File Grep",
+        b = "Find Buffer",
     }
 }, { prefix = "<leader>" })
 

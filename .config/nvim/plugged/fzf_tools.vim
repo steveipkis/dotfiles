@@ -16,6 +16,10 @@ nmap <leader>fw <cmd>RG<CR>
 command! Files :lua require('fzf-lua').files({ cwd_prompt = false, prompt = 'Files❯ ' })<CR>
 nmap <leader>ff <cmd>Files<CR>
 
+" Buffer Navigation
+command! Buffers :lua require('fzf-lua').buffers()<CR>
+nmap <leader>fb <cmd>Buffers<CR>
+
 " Map <Esc> key to silently clear search highlighting
 nnoremap <silent> <leader>th :lua require("fzf-lua").colorschemes()<CR>
 

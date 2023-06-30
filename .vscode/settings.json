@@ -1,4 +1,5 @@
 {
+    "window.zoomLevel": 1,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
     "files.autoSave": "afterDelay",
@@ -35,5 +36,67 @@
     "python.linting.pylintArgs": [
         "--rcfile",
         "./.pylintrc"
+    ],
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/Users/hnadeem/Applications/homebrew/bin/nvim",
+    "vim.neovimUseConfigFile": false,
+    "vim.neovimConfigPath": "/Users/hnadeem/.config/nvim/init.vim",
+    "vim.leader": " ",
+    "vim.commandLineModeKeyBindings": [],
+    "vim.easymotion": true,
+    "vim.sneak": false,
+    "vim.replaceWithRegister": true,
+    "vim.smartRelativeLine": false,
+    "vim.useSystemClipboard": true,
+    "vim.visualstar": true,
+    "vim.hlsearch": true,
+    "vim.shell": "bin/zsh",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "x"
+            ],
+            "after": [
+                "\"_",
+                "x"
+            ]
+        },
+        {
+            "before": [
+                "0"
+            ],
+            "after": [
+                "^"
+            ]
+        },
+        {
+            "before": [
+                "^"
+            ],
+            "after": [
+                "0"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "<Esc>"
+            ],
+            "commands": [
+                ":nohl"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                "<leader>",
+                "f"
+            ],
+            "commands": [
+                "editor.action.formatSelection"
+            ]
+        }
     ]
 }

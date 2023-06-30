@@ -108,10 +108,6 @@ xnoremap <silent> p p:let @+=@0<CR>:let @"=@0<CR>
 vnoremap < <gv
 vnoremap > >gv
 
-" Remap multi-line select to match VsCode Vim command g+b
-nmap gb <C-n>
-xmap gb <C-n>
-
 " Use alt + hjkl to resize windows (Alt needs to be remapped in iTerm2)
 nnoremap <m-k> :resize -2<cr>
 nnoremap <m-j> :resize +2<cr>
