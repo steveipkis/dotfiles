@@ -108,6 +108,10 @@ xnoremap <silent> p p:let @+=@0<CR>:let @"=@0<CR>
 vnoremap < <gv
 vnoremap > >gv
 
+" " Remap multi-line select to match VsCode Vim command g+b
+" nmap gb <C-n>
+" xmap gb <C-n>
+
 " Use alt + hjkl to resize windows (Alt needs to be remapped in iTerm2)
 nnoremap <m-k> :resize -2<cr>
 nnoremap <m-j> :resize +2<cr>
@@ -149,17 +153,17 @@ source ~/.config/nvim/plugged/fzf_tools.vim
 source ~/.config/nvim/plugged/hop.vim
 source ~/.config/nvim/plugged/illuminate.vim
 source ~/.config/nvim/plugged/impatient.vim
-source ~/.config/nvim/plugged/indent.vim
+" source ~/.config/nvim/plugged/indent.vim
 source ~/.config/nvim/plugged/key.vim
 source ~/.config/nvim/plugged/lualine.vim
-source ~/.config/nvim/plugged/nvim_tree.vim
 source ~/.config/nvim/plugged/nv_term.vim
+source ~/.config/nvim/plugged/nvim_tree.vim
 source ~/.config/nvim/plugged/rooter.vim
 source ~/.config/nvim/plugged/startify.vim
 source ~/.config/nvim/plugged/surround.vim
 source ~/.config/nvim/plugged/themes.vim
 source ~/.config/nvim/plugged/treesitter.vim
-" source ~/.config/nvim/plugged/vimsignature.vim
+source ~/.config/nvim/plugged/vimsignature.vim
 source ~/.config/nvim/plugged/vimtargets.vim
 
 call plug#end()
@@ -173,8 +177,10 @@ let g:one_allow_italics = 1
 "- Slowest Color Scheme
 " colorscheme bluloco-dark
 
-colorscheme dracula
-
+" colorscheme nord
+" let g:nord_italic = v:true
+" let g:nord_bold = v:true
+"
 " colorscheme gruvbox
 " let g:gruvbox_contrast_dark='hard'
 
@@ -182,13 +188,14 @@ colorscheme dracula
 " let g:oceanic_next_terminal_bold = 1
 " let g:oceanic_next_terminal_italic = 1
 
-" colorscheme night-owl
+colorscheme night-owl
+
+" colorscheme dracula
 
 " -------------------------------------------------------------------------------------------
 "  Lua Configurations
 " -------------------------------------------------------------------------------------------
 
-"- Configuration for illuminate should not be lazily loaded
 lua << EOF
 require('treesitter')       -- ./lua/treesitter.lua
 require('word_illuminate')  -- ./lua/word_illuminate.lua
@@ -201,8 +208,9 @@ require('coke')             -- ./lua/coke.lua
 require('comment')          -- ./lua/comment.lua
 require('fzf_tools')        -- ./lua/fzf_tools.lua
 require('hopper')           -- ./lua/hopper.lua
-require('indent')           -- ./lua/indent.lua
+-- require('indent')           -- ./lua/indent.lua
 require('key')              -- ./lua/key.lua
 require('nvim_tree')        -- ./lua/nvim_tree.lua
+require('signature')        -- ./lua/signature.lua
 require('status_line')      -- ./lua/status_line.lua
 EOF

@@ -12,5 +12,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'haishanh/night-owl.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
-" Plug 'rktjmp/lush.nvim'     "- Needed for bluloco
-" Plug 'uloco/bluloco.nvim'
+Plug 'rktjmp/lush.nvim'     "- Needed for bluloco
+Plug 'uloco/bluloco.nvim'
+Plug 'shaunsingh/nord.nvim'

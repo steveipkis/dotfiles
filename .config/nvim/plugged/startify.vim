@@ -82,8 +82,8 @@ let g:startify_bookmarks = [
             \ { 'i': '~/Code/disney/introspection'},
             \ ]
 
+          " \ { 'type': function('s:gitModified'), 'header': ['   Git Modified']},
 let g:startify_lists = [
-          \ { 'type': function('s:gitModified'), 'header': ['   Git Modified']},
           \ { 'type': 'files', 'header': ['   Recent Files'] },
           \ { 'type': 'commands',  'header': ['   Commands'] },
           \ ]

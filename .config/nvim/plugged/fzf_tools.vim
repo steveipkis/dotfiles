@@ -1,4 +1,5 @@
 Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
+" Plug 'junegunn/fzf'
 
 " To allow for interactive mode auto-completion
 inoremap <c-x><c-f> <cmd>lua require("fzf-lua").complete_path()<cr>
