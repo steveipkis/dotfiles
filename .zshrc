@@ -33,7 +33,7 @@ export PATH="~/Applications/homebrew/bin:$PATH"
 export FZF_BASE="~/Applications/homebrew/bin/fzf";
 
 # zsh based plugins
-plugins=(zsh-autosuggestions zsh-peco-history fzf zsh-z)
+plugins=(zsh-autosuggestions zsh-peco-history fzf zsh-z zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # load custom built functions
@@ -129,3 +129,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
