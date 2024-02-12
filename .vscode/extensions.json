@@ -17,7 +17,7 @@
     "ms-toolsai.jupyter-keymap",
     "ms-toolsai.jupyter-renderers",
     // Configuration files
-    "bungcip.better-toml",
+    "tamasfe.even-better-toml",
     "IronGeek.vscode-env",
     "redhat.vscode-yaml",
     // Terraform related dependencies
@@ -31,12 +31,6 @@
     "eamodio.gitlens",
     "visualstudioexptteam.vscodeintellicode",
     // Vim in Vscode
-    "vscodevim.vim",
-    // Foam
-    "ban.spellright",
-    "bierner.emojisense",
-    "foam.foam-vscode",
-    "mushan.vscode-paste-image",
-    "yzhang.markdown-all-in-one"
+    "vscodevim.vim"
   ]
 }
