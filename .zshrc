@@ -27,10 +27,10 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ##########################################################
 
 ## Local Brew installation
-export PATH="~/Applications/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
 
 ## Local Plugins and Functions Configuration
-export FZF_BASE="~/Applications/homebrew/bin/fzf";
+export FZF_BASE="/opt/homebrew/bin/fzf";
 
 # zsh based plugins
 plugins=(zsh-autosuggestions zsh-peco-history fzf zsh-z zsh-syntax-highlighting)
@@ -50,9 +50,9 @@ eval "$(zoxide init zsh)"
 alias vim="nvim"
 alias vi="nvim"
 
-alias ls="exa"
-alias ll="exa -alh --group-directories-first"
-alias tree="exa --tree --git-ignore"
+alias ls="eza"
+alias ll="eza -alh --group-directories-first"
+alias tree="eza --tree --git-ignore"
 alias cd="z"
 
 alias gits="git status"
@@ -62,8 +62,6 @@ alias gitlog="git log --all --decorate --oneline --graph"
 alias gitstashdrop="git stash list | peco | grep -o '{[0-9]*}' | cut -d'{' -f2 | cut -d'}' -f1 | sort -ur | xargs -n 1 -I {} git stash drop stash@{{}}"
 alias gitreset="git reset --merge"
 
-alias python2="python"
-alias pip2="python -m pip"
 alias python="python3"
 alias pip="python3 -m pip"
 
