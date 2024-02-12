@@ -12,7 +12,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 
 brew install bat \
     dataframehq/tap/whale \
-    exa \
+    eza \
     fzf \
     jenv \
     jq  \
@@ -20,6 +20,7 @@ brew install bat \
     peco \
     pyenv \
     the_silver_searcher \
+    yq \
     zoxide
 
 ############################################################
