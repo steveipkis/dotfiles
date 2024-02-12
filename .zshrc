@@ -65,9 +65,7 @@ alias gitreset="git reset --merge"
 alias python="python3"
 alias pip="python3 -m pip"
 
-alias bathelp='bat --plain --language=cmd-help'
 alias wh="EDITOR=nvim wh"
-alias pensieve="code ~/Code/personal/pensieve"
 
 alias loadup_time="nvim --startuptime /tmp/startup.log -c exit && tail -n 1 /tmp/startup.log"
 alias brewupgrade="brew outdated | xargs brew install"
@@ -95,27 +93,13 @@ fg() {
 # setting up git to use nvim
 export GIT_EDITOR=nvim
 
-# setting up java and scala
-export JAVA_HOME=$(/usr/libexec/java_home)
-export PATH="~/Applications/homebrew/opt/openjdk@8/bin:$PATH"
-export SCALA_HOME='~/Applications/homebrew/opt/scala@2.12'
-export PATH=$PATH:$SCALA_HOME/bin
-export PATH=$PATH:/opt/apache-maven/bin
+# Setting up java with jenv
+export PATH="$HOME/.jenv/bin:$PATH"
+eval "$(jenv init -)"
 
-# setting up spark
-export SPARK_HOME="~/Applications/spark/python"
-export PATH=$PATH:/usr/local/git/bin:$SPARK_HOME/bin
-
-# Add pyenv executable to PATH and
-# enable shims by adding the following
-# to ~/.profile and ~/.zprofile:
-
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-
-# Load pyenv into the shell by adding
-# the following to ~/.zshrc:
+# Setting up pyenv
+export pyenv_root="$home/.pyenv"
+[[ -d $pyenv_root/bin ]] && export path="$pyenv_root/bin:$path"
 eval "$(pyenv init -)"
 
 # sets up nvm for managing node
@@ -126,8 +110,7 @@ export NVM_DIR="$HOME/.nvm"
 # sets up Postgres
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
 
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+# NOTE: JAVA_HOME and SCALA_HOME configured by jenv and sdkman
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
