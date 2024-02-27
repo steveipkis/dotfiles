@@ -1,10 +1,15 @@
 {
+    "workbench.colorTheme": "GitHub Dark",
     "window.zoomLevel": 1,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.cursorSurroundingLines": 8,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "trailing",
+    "editor.snippetSuggestions": "top",
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 500,
-    "editor.snippetSuggestions": "top",
+    "files.trimTrailingWhitespace": true,
     "files.watcherExclude": {
         "**/.git/objects/**": true,
         "**/.git/subtree-cache/**": true,
@@ -28,15 +33,8 @@
         "**/.metals": true
     },
     "python.defaultInterpreterPath": "venv/bin/python",
-    "python.pythonPath": "venv/bin/python",
-    "python.formatting.provider": "black",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
     "python.languageServer": "Default",
-    "python.linting.pylintArgs": [
-        "--rcfile",
-        "./.pylintrc"
-    ],
+    "pythonIndent.trimLinesWithOnlyWhitespace": true,
     "vim.enableNeovim": true,
     "vim.neovimPath": "/Users/hnadeem/Applications/homebrew/bin/nvim",
     "vim.neovimUseConfigFile": false,
@@ -98,5 +96,6 @@
                 "editor.action.formatSelection"
             ]
         }
-    ]
+    ],
+    "git.openRepositoryInParentFolders": "never"
 }
