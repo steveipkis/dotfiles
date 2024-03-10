@@ -2,8 +2,8 @@
 "  Plugins
 " -------------------------------------------------------------------------------------------
 
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'tag': 'v0.0.82'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'tag': 'v0.0.82'}
 
 let g:coc_global_extensions = [
                 \ 'coc-docker',
