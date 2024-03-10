@@ -83,6 +83,13 @@ let g:loaded_logiPat = 1
 let g:loaded_rrhelper = 1
 
 " -------------------------------------------------------------------------------------------
+" Disable Unused Providers
+" -------------------------------------------------------------------------------------------
+
+let g:loaded_perl_provider = 0
+let g:loaded_ruby_provider = 0
+
+" -------------------------------------------------------------------------------------------
 "  Key Maps
 " -------------------------------------------------------------------------------------------
 
@@ -107,10 +114,6 @@ xnoremap <silent> p p:let @+=@0<CR>:let @"=@0<CR>
 " Reselect visual selection after indenting
 vnoremap < <gv
 vnoremap > >gv
-
-" " Remap multi-line select to match VsCode Vim command g+b
-" nmap gb <C-n>
-" xmap gb <C-n>
 
 " Use alt + hjkl to resize windows (Alt needs to be remapped in iTerm2)
 nnoremap <m-k> :resize -2<cr>
@@ -162,6 +165,7 @@ source ~/.config/nvim/plugged/rooter.vim
 source ~/.config/nvim/plugged/startify.vim
 source ~/.config/nvim/plugged/surround.vim
 source ~/.config/nvim/plugged/themes.vim
+source ~/.config/nvim/plugged/todo_comments.vim
 source ~/.config/nvim/plugged/treesitter.vim
 source ~/.config/nvim/plugged/vimsignature.vim
 source ~/.config/nvim/plugged/vimtargets.vim
@@ -204,6 +208,7 @@ require('lazy_loader')      -- ./lua/lazy_loader.lua
 -- All Plugins Below are lazily loaded
 require('nvim-surround').setup({})
 require("nvterm").setup({})
+require('todo-comments').setup({})
 require('coke')             -- ./lua/coke.lua
 require('comment')          -- ./lua/comment.lua
 require('fzf_tools')        -- ./lua/fzf_tools.lua
