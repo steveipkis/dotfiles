@@ -86,6 +86,18 @@ pyenv global 3.9.18
 python3 -m pip install --user --upgrade pynvim
 
 ############################################################
+# Install Terraform
+############################################################
+
+# install tfenv to manage terraform versions
+brew install tfenv
+tfenv install 1.7.3
+tfenv use 1.7.3
+
+# install the language server protocol for vim
+brew install hashicorp/tap/terraform-ls
+
+############################################################
 # Set up Java Environment
 ############################################################
 
