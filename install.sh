@@ -28,6 +28,7 @@ brew install bat \
     dataframehq/tap/whale \
     eza \
     fzf \
+    fd \
     jenv \
     jq  \
     neovim \
@@ -56,8 +57,8 @@ cp -r .config/nvim ~/.config/.;
 # Install nvm and node for nvim-coc autocompletion
 ############################################################
 
-ENV NODE_VERSION=16.13.0;
-# ENV NODE_VERSION=18.16.1;
+ENV NODE_VERSION=18.16.1;
+# ENV NODE_VERSION=20.11.1;
 
 brew uninstall --force node
 brew uninstall --ignore-dependencies node
@@ -72,12 +73,17 @@ nvm install ${NODE_VERSION};
 nvm use v${NODE_VERSION};
 nvm alias default v${NODE_VERSION};
 
+npm install -g neovim
+npm install -g typescript
+
 ############################################################
 # Set up local python environment
 ############################################################
 
 pyenv install 3.9.18
 pyenv global 3.9.18
+
+python3 -m pip install --user --upgrade pynvim
 
 ############################################################
 # Set up Java Environment
