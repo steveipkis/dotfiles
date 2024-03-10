@@ -113,6 +113,8 @@ jenv add /Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home/
 brew install --cask homebrew/cask-versions/adoptopenjdk8
 jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
 
+jenv global 1.8
+
 # Setup jenv plugin compatibility
 jenv enable-plugin export
 jenv enable-plugin maven
