@@ -33,7 +33,7 @@ export PATH="/opt/homebrew/bin:$PATH"
 export FZF_BASE="/opt/homebrew/bin/fzf";
 
 # zsh based plugins
-plugins=(zsh-autosuggestions zsh-peco-history fzf zsh-z zsh-syntax-highlighting)
+plugins=(zsh-autosuggestions zsh-peco-history fzf zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # load custom built functions
@@ -101,6 +101,7 @@ eval "$(jenv init -)"
 export pyenv_root="$home/.pyenv"
 [[ -d $pyenv_root/bin ]] && export path="$pyenv_root/bin:$path"
 eval "$(pyenv init -)"
+eval "$(pyenv init --path)"
 
 # sets up nvm for managing node
 export NVM_DIR="$HOME/.nvm"
