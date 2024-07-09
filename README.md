@@ -15,7 +15,7 @@ This configuration entails:
 * [.oh-my-zsh/custom](.oh-my-zsh/custom): Custom packages that I use with my zsh configuration.
 * [.my_zsh_functions](.my_zsh_functions): Custom functions I wrote and loaded into the environment.
 * [.config/nvim](.config/nvim): this configures nvim to use fzf, ag and a bunch of plugins to make vim use easy.
-  * current setup supports nvim 0.8.2
+  * current setup supports nvim 0.10.0
 
 ## External Apps to Install
 
@@ -25,7 +25,6 @@ This configuration entails:
 * [Postico](https://eggerapps.at/postico/)
 * [Postman](https://www.postman.com/downloads/)
 * [VsCode](https://code.visualstudio.com/download)
-  * [Foam](https://github.com/foambubble/foam)
 
 ## Deploying changes
 
