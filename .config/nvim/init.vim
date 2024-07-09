@@ -56,6 +56,9 @@ au! BufWritePost $MYVIMRC source %
 " In order to treat Jenkinsfile as groovy
 autocmd BufRead,BufNewFile Jenkinsfile set filetype=groovy
 
+" Set netrw to be able to open weblinks with gx
+" let g:netrw_http_cmd='open'
+
 " -------------------------------------------------------------------------------------------
 " Disable Unused Standard Plugins
 " -------------------------------------------------------------------------------------------
@@ -96,6 +99,9 @@ let g:loaded_ruby_provider = 0
 " Edit init.vim without having to navigate
 command! Vimedit edit $MYVIMRC
 
+" Map ; to be the same as :
+nnoremap ; :
+
 " Allow gf to open non-existent files
 map gf :edit <cfile><cr>
 
@@ -108,12 +114,13 @@ nmap <leader>x :exec '!'.getline('.')<cr>
 " Execute current line in bash and write output to File
 nmap <leader>X :exec 'r!'.getline('.')<CR>
 
-" Replace-with-register alternative: don't copy the replaced text after pasting in visual mode
-xnoremap <silent> p p:let @+=@0<CR>:let @"=@0<CR>
-
 " Reselect visual selection after indenting
 vnoremap < <gv
 vnoremap > >gv
+
+" Move visually selected code
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " Use alt + hjkl to resize windows (Alt needs to be remapped in iTerm2)
 nnoremap <m-k> :resize -2<cr>
@@ -136,12 +143,27 @@ nnoremap <tab> :bnext<cr>
 " SHIFT-TAB will go back
 nnoremap <s-tab> :bprevious<cr>
 
+" Replace-with-register alternative
+xnoremap <silent> p "_dP
+
+" Replace-with-register alternative: don't copy the replaced text after pasting in visual mode
+xnoremap <silent> <leader>p p:let @+=@0<CR>:let @"=@0<CR>
+
 " Send char deletes to black hole, not worth saving
 nnoremap x "_x
+nnoremap X "_X
+
 " Move across wrapped lines like regular lines
 noremap 0 ^
 " Just in case you need to go to the very beginning of a line
 noremap ^ 0
+
+" Setup quick command for Startify
+nnoremap <silent> <leader>z :Startify<CR>
+
+" Search forward for the [count]'th occurrence of the next word starting with current word
+nnoremap <silent> * *N
+vnoremap <silent> * *N
 
 " -------------------------------------------------------------------------------------------
 "  Plugins
@@ -155,20 +177,15 @@ source ~/.config/nvim/plugged/commentary.vim
 source ~/.config/nvim/plugged/fzf_tools.vim
 source ~/.config/nvim/plugged/hop.vim
 source ~/.config/nvim/plugged/illuminate.vim
-source ~/.config/nvim/plugged/impatient.vim
-" source ~/.config/nvim/plugged/indent.vim
 source ~/.config/nvim/plugged/key.vim
 source ~/.config/nvim/plugged/lualine.vim
-source ~/.config/nvim/plugged/nv_term.vim
 source ~/.config/nvim/plugged/nvim_tree.vim
-source ~/.config/nvim/plugged/rooter.vim
 source ~/.config/nvim/plugged/startify.vim
 source ~/.config/nvim/plugged/surround.vim
 source ~/.config/nvim/plugged/themes.vim
-source ~/.config/nvim/plugged/todo_comments.vim
 source ~/.config/nvim/plugged/treesitter.vim
-source ~/.config/nvim/plugged/vimsignature.vim
-source ~/.config/nvim/plugged/vimtargets.vim
+source ~/.config/nvim/plugged/undo.vim
+" source ~/.config/nvim/plugged/vimtargets.vim
 
 call plug#end()
 
@@ -203,19 +220,14 @@ colorscheme night-owl
 lua << EOF
 require('treesitter')       -- ./lua/treesitter.lua
 require('word_illuminate')  -- ./lua/word_illuminate.lua
-require('project')          -- ./lua/project.lua
-require('lazy_loader')      -- ./lua/lazy_loader.lua
 -- All Plugins Below are lazily loaded
 require('nvim-surround').setup({})
-require("nvterm").setup({})
-require('todo-comments').setup({})
 require('coke')             -- ./lua/coke.lua
 require('comment')          -- ./lua/comment.lua
 require('fzf_tools')        -- ./lua/fzf_tools.lua
 require('hopper')           -- ./lua/hopper.lua
--- require('indent')           -- ./lua/indent.lua
 require('key')              -- ./lua/key.lua
 require('nvim_tree')        -- ./lua/nvim_tree.lua
-require('signature')        -- ./lua/signature.lua
 require('status_line')      -- ./lua/status_line.lua
 EOF
+
