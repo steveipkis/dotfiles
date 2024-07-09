@@ -31,3 +31,4 @@ silent! let g:plugs['vim-startify'].commit = '4e089dffdad46f3f5593f34362d530e8fe
 silent! let g:plugs['which-key.nvim'].commit = 'af4ded85542d40e190014c732fa051bdbf88be3d'
 
 PlugUpdate!
+

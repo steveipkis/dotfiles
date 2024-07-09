@@ -8,8 +8,8 @@ Plug 'ryanoasis/vim-devicons'
 " -------------------------------------------------------------------------------------------
 
 Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'haishanh/night-owl.vim'
+Plug 'Mofiqul/dracula.nvim', { 'as': 'dracula' }
+Plug 'oxfist/night-owl.nvim'
 Plug 'mhartington/oceanic-next'
 Plug 'morhetz/gruvbox'
 Plug 'rktjmp/lush.nvim'     "- Needed for bluloco
