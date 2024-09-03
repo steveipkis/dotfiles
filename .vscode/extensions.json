@@ -2,6 +2,8 @@
   "recommendations": [
     // Python extensions for Visual Studio Code
     "kevinrose.vsc-python-indent",
+    "ms-python.black-formatter",
+    "ms-python.debugpy",
     "ms-python.python",
     "ms-python.vscode-pylance",
     "njpwerner.autodocstring",
@@ -16,10 +18,13 @@
     "ms-toolsai.jupyter",
     "ms-toolsai.jupyter-keymap",
     "ms-toolsai.jupyter-renderers",
+    "ms-toolsai.vscode-jupyter-cell-tags",
+    "ms-toolsai.vscode-jupyter-slideshow",
     // Configuration files
     "tamasfe.even-better-toml",
     "IronGeek.vscode-env",
     "redhat.vscode-yaml",
+    "github.vscode-github-actions",
     // Terraform related dependencies
     "hashicorp.hcl",
     "hashicorp.terraform",
@@ -31,6 +36,14 @@
     "eamodio.gitlens",
     "visualstudioexptteam.vscodeintellicode",
     // Vim in Vscode
-    "vscodevim.vim"
+    "vscodevim.vim",
+    // Typescript
+    "dbaeumer.vscode-eslint",
+    "oouo-diogo-perdigao.docthis",
+    "esbenp.prettier-vscode",
+    "YoavBls.pretty-ts-errors",
+    // Themes
+    "emmanuelbeziat.vscode-great-icons",
+    "GitHub.github-vscode-theme"
   ]
 }
