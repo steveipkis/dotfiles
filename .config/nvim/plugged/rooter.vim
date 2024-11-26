@@ -1,1 +1,0 @@
-Plug 'ahmedkhalf/project.nvim'

@@ -18,6 +18,18 @@ cp ~/.config/nvim/plugged/themes.vim ./.config/nvim/plugged/themes.vim
 cp ~/.config/nvim/plugged/treesitter.vim ./.config/nvim/plugged/treesitter.vim
 cp ~/.config/nvim/plugged/undo.vim ./.config/nvim/plugged/undo.vim
 cp ~/.config/nvim/plugged/vimtargets.vim ./.config/nvim/plugged/vimtargets.vim
+cp ~/.config/nvim/plugged/z.vim ./.config/nvim/plugged/z.vim
+
+# Sync Lua Configurations
+cp ~/.config/nvim/lua/treesitter.lua ./.config/nvim/lua/treesitter.lua
+cp ~/.config/nvim/lua/word_illuminate.lua ./.config/nvim/lua/word_illuminate.lua
+cp ~/.config/nvim/lua/coke.lua ./.config/nvim/lua/coke.lua
+cp ~/.config/nvim/lua/comment.lua ./.config/nvim/lua/comment.lua
+cp ~/.config/nvim/lua/fzf_tools.lua ./.config/nvim/lua/fzf_tools.lua
+cp ~/.config/nvim/lua/hopper.lua ./.config/nvim/lua/hopper.lua
+cp ~/.config/nvim/lua/key.lua ./.config/nvim/lua/key.lua
+cp ~/.config/nvim/lua/nvim_tree.lua ./.config/nvim/lua/nvim_tree.lua
+cp ~/.config/nvim/lua/status_line.lua ./.config/nvim/lua/status_line.lua
 
 # Sync a snapshot of versions of plugins that were working last
 cp ~/.config/nvim/snapshot.vim ./.config/nvim/snapshot.vim

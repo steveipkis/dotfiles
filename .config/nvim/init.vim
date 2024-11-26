@@ -57,7 +57,7 @@ au! BufWritePost $MYVIMRC source %
 autocmd BufRead,BufNewFile Jenkinsfile set filetype=groovy
 
 " Set netrw to be able to open weblinks with gx
-" let g:netrw_http_cmd='open'
+let g:netrw_http_cmd='open'
 
 " -------------------------------------------------------------------------------------------
 " Disable Unused Standard Plugins
@@ -98,6 +98,7 @@ let g:loaded_ruby_provider = 0
 
 " Edit init.vim without having to navigate
 command! Vimedit edit $MYVIMRC
+command! Unique :syn clear Repeat | g/^\(.*\)\n\ze\%(.*\n\)*\1$/exe 'syn match Repeat "^' . escape(getline('.'), '".\^$*[]') . '$"' | nohlsearch
 
 " Map ; to be the same as :
 nnoremap ; :
@@ -185,7 +186,7 @@ source ~/.config/nvim/plugged/surround.vim
 source ~/.config/nvim/plugged/themes.vim
 source ~/.config/nvim/plugged/treesitter.vim
 source ~/.config/nvim/plugged/undo.vim
-" source ~/.config/nvim/plugged/vimtargets.vim
+source ~/.config/nvim/plugged/z.vim
 
 call plug#end()
 
@@ -220,7 +221,6 @@ colorscheme night-owl
 lua << EOF
 require('treesitter')       -- ./lua/treesitter.lua
 require('word_illuminate')  -- ./lua/word_illuminate.lua
--- All Plugins Below are lazily loaded
 require('nvim-surround').setup({})
 require('coke')             -- ./lua/coke.lua
 require('comment')          -- ./lua/comment.lua

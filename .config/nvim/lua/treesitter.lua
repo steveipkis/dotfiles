@@ -3,7 +3,6 @@ local treesitter = require('nvim-treesitter.configs').setup({
       -- ensure_installed = "all",
       ensure_installed = {
          "bash",
-         "c",
          "cmake",
          "diff",
          "dockerfile",
@@ -36,7 +35,7 @@ local treesitter = require('nvim-treesitter.configs').setup({
          "toml",
          "yaml",
       },
-      ignore_install = { "lua", "wgsl" },
+      ignore_install = { "c", "lua", "wgsl" },
       auto_install = true,
       enable = true,
       disable = { "txt", "md" },
