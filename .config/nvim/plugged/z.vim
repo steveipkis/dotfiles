@@ -1,0 +1,1 @@
+Plug 'nanotee/zoxide.vim'

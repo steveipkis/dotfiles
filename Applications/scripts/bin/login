@@ -1,0 +1,123 @@
+#!/usr/local/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+################################################################
+# The command line help #
+################################################################
+
+display_help() {
+
+    echo "Usage: $0" >&2
+    echo
+    echo "An interactive bash wrapper on top of the sde command line" >&2
+    echo "in order to make login for users in the data-engineering org easier" >&2
+    echo
+    echo "For more info on setting up sde, navigate to:" >&2
+    echo "https://cp-docs.siriusxm.com/getting_started/technologist_setup/configure_development_environment/set_up_sde/" >&2
+    echo
+    echo "   -h, --help                 show this help text"
+    echo
+    # echo some stuff here for the -a or --add-options
+    exit 1
+}
+
+################################################################
+# Check if parameters options are given on the commandline
+################################################################
+
+while :
+do
+    case "$1" in
+      -h | --help)
+          display_help  # Call your function
+          exit 0
+          ;;
+      *)  # No more options
+          break
+          ;;
+    esac
+done
+
+################################################################
+# Function Execution
+################################################################
+
+################################################################
+######## WORKLOAD
+################################################################
+
+FILENAME=$(ls ~/.sde/config/workloads \
+    | grep '\bdata-eng\b\|datalake' \
+    | cut -d '.' -f 1 \
+    | fzf --exact -m --preview 'yq --colors eval "del(.aws) | ." <  /Users/haris.nadeem/.sde/config/workloads/{}.yaml' --preview-window=right:60%)
+
+# Exit out if escaped
+if [ -z $FILENAME ]; then
+    echo -e "Escaped out of script... Terminating"
+    exit 1
+fi
+
+################################################################
+######## VARIABLES
+################################################################
+
+FILEPATH="$HOME/.sde/config/workloads/$FILENAME.yaml"
+WORKLOAD=$(cat $FILEPATH | yq '.name')
+VERSION_NUMBER=$(cat $FILEPATH | yq '.aws | .roles' | grep -o 'version: v[0-9]*' | awk -F'[: ]' '/version: v/{print substr($3, 2)}')
+
+################################################################
+######## ENV
+################################################################
+
+ENV=$(cat $FILEPATH \
+| yq '.aws.accounts | keys | .[]' \
+| fzf --exact -m --preview "echo {} | xargs -I {} yq --colors '.aws.accounts' \"$FILEPATH\"" --preview-window=right:60%)
+
+# Exit out if escaped
+if [ -z $ENV ]; then
+    echo -e "Escaped out of script... Terminating"
+    exit 1
+fi
+
+################################################################
+######## ROLES
+################################################################
+
+# For more info on role types, please refer here:
+# https://ghe.siriusxm.com/platform-eng/.sde/blob/e74f37c128d61c3da759456256503dfa0a1d3fa7/lib/pysde/sde_config.py#L32-L60
+if [ $VERSION_NUMBER -eq 2 ]; then
+    ROLE=$(echo -e 'ReadOnly \nDevOps \nOpsAdmin \nPowerUser \nPlatformSupport \nPlatformAdministrator \nSecurityIncidentResponse' | peco --prompt='Available AWS roles')
+elif [ $VERSION_NUMBER -eq 3 ]; then
+    ROLE=$(echo -e 'Engineer \nElevatedEngineer' | peco --prompt='Available AWS roles')
+else
+    echo -e "Unknown Version ${VERSION_NUMBER}... Terminating"
+    exit 1
+fi
+
+# Exit out if escaped
+if [ -z $ROLE ]; then
+    echo -e "Escaped out of script... Terminating"
+    exit 1
+fi
+
+################################################################
+######## IMPORT SDE
+################################################################
+
+source $HOME/.sde/profile/profile.sh
+
+################################################################
+######## LOGIN
+################################################################
+
+
+eval $(echo -e "sde config set --workload=$WORKLOAD --env=$ENV --default-aws-role=$ROLE")
+eval $(echo -e "sde login")
+
+# echo -e "sde config set --workload=$WORKLOAD --env=$ENV --default-aws-role=$ROLE"
+# echo -e "sde login"
+
+# aws sts get-caller-identity

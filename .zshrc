@@ -16,7 +16,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Path to your oh-my-zsh installation.
-export ZSH="~/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -49,26 +49,29 @@ eval "$(zoxide init zsh)"
 # In order to use neovim in place of vim. You can always type \vim to ignore the alias
 alias vim="nvim"
 alias vi="nvim"
+alias zed="open -a /Applications/Zed.app -n"
 
 alias ls="eza"
 alias ll="eza -alh --group-directories-first"
-alias tree="eza --tree --git-ignore"
+alias tree="eza --tree --group-directories-first --git-ignore"
 alias cd="z"
 
 alias gits="git status"
-alias gitbranch="git branch | peco | xargs git checkout"
+alias gitbranch="git branch | peco | xargs git switch"
 alias gitdelete="git branch | peco | xargs git branch -D"
+alias gitfetch="git fetch --all --tags --prune-tags --prune"
 alias gitlog="git log --all --decorate --oneline --graph"
-alias gitstashdrop="git stash list | peco | grep -o '{[0-9]*}' | cut -d'{' -f2 | cut -d'}' -f1 | sort -ur | xargs -n 1 -I {} git stash drop stash@{{}}"
+alias gitprune="git branch -vv | grep 'gone]' | awk '{print $1}' | xargs git branch -D"
 alias gitreset="git reset --merge"
+alias gitstashdrop="git stash list | peco | grep -o '{[0-9]*}' | cut -d'{' -f2 | cut -d'}' -f1 | sort -ur | xargs -n 1 -I {} git stash drop stash@{{}}"
 
 alias python="python3"
 alias pip="python3 -m pip"
 
-alias wh="EDITOR=nvim wh"
-
 alias loadup_time="nvim --startuptime /tmp/startup.log -c exit && tail -n 1 /tmp/startup.log"
 alias brewupgrade="brew outdated | xargs brew install"
+
+# alias csv="jq -r '(map(keys) | add | unique) as $cols | map(. as $row | $cols | map($row[.])) as $rows | $cols, $rows[] | @csv'"
 
 ##########################################################
 # Custom Functions
@@ -93,6 +96,14 @@ fg() {
 # setting up git to use nvim
 export GIT_EDITOR=nvim
 
+# Custom scripts
+export PATH="$HOME/Applications/scripts/bin:$PATH"
+
+# sets up nvm for managing node and for nvim code completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # Setting up java with jenv
 export PATH="$HOME/.jenv/bin:$PATH"
 eval "$(jenv init -)"
@@ -102,11 +113,6 @@ export pyenv_root="$home/.pyenv"
 [[ -d $pyenv_root/bin ]] && export path="$pyenv_root/bin:$path"
 eval "$(pyenv init -)"
 eval "$(pyenv init --path)"
-
-# sets up nvm for managing node
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # sets up Postgres
 export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"

@@ -31,6 +31,7 @@
     // Shell Development
     "ms-azuretools.vscode-docker",
     "ms-vscode.makefile-tools",
+    "ms-vscode-remote.remote-containers",
     // Miscellaneous tools for everyday coding
     "adpyke.vscode-sql-formatter",
     "eamodio.gitlens",

@@ -4,7 +4,7 @@
 xcode-select -–install;
 
 # Now we'll need to install Homebrew in order to install packages
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 ############################################################
 # Set up zsh environment
@@ -24,7 +24,6 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 ############################################################
 
 brew install bat \
-    dataframehq/tap/whale \
     eza \
     fzf \
     fd \
@@ -56,8 +55,7 @@ cp -r .config/nvim ~/.config/.;
 # Install nvm and node for nvim-coc autocompletion
 ############################################################
 
-ENV NODE_VERSION=18.16.1;
-# ENV NODE_VERSION=20.11.1;
+ENV NODE_VERSION=20.11.1;
 
 brew uninstall --force node
 brew uninstall --ignore-dependencies node
@@ -79,8 +77,8 @@ npm install -g typescript
 # Set up local python environment
 ############################################################
 
-pyenv install 3.9.18
-pyenv global 3.9.18
+pyenv install 3.11.9
+pyenv global 3.11.9
 
 python3 -m pip install --user --upgrade pynvim
 
@@ -102,6 +100,7 @@ brew install hashicorp/tap/terraform-ls
 
 # Install to manage multiple java versions
 brew install jenv
+jenv init -
 
 # Install java 11 and link to jenv
 brew install openjdk@11
@@ -109,8 +108,8 @@ sudo ln -sfn /opt/homebrew/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/Java
 jenv add /Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home/
 
 # Install java8 on arm and link to jenv
-brew install --cask homebrew/cask-versions/adoptopenjdk8
-jenv add /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home/
+brew tap AdoptOpenJDK/openjdk
+brew install --cask adoptopenjdk8
 
 jenv global 1.8
 

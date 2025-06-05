@@ -1,0 +1,80 @@
+#!/usr/local/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+NC='\033[0m'
+
+################################################################
+# The command line help #
+################################################################
+
+display_help() {
+
+    echo "Usage: $0 [workspace] [email]" >&2
+    echo
+    echo "   workspace                  the databricks workspace to use"
+    echo "   email                      the users siriusxm email address"
+    echo "   -h, --help                 show this help text"
+    echo
+    # echo some stuff here for the -a or --add-options
+    exit 1
+}
+
+################################################################
+# Check if parameters options are given on the commandline
+################################################################
+
+while :
+do
+    case "$1" in
+      -h | --help)
+          display_help  # Call your function
+          exit 0
+          ;;
+      *)  # No more options
+          break
+          ;;
+    esac
+done
+
+################################################################
+# Function Execution
+################################################################
+
+ENV=$1
+EMAIL=$2
+
+## Create a dictionary for all our workspaces
+declare -A WORKSPACE
+WORKSPACE=( ["PROD"]="dbc-2bcb7c03-2845" ["DEV"]="dbc-5e4c4e7b-aa35" ["TEST"]="dbc-794d7fff-bde9")
+
+## First validate the workspace
+DENV=`grep \-E "\[(.*)\]" ~/.databrickscfg`
+if echo "${DENV}" | fgrep --word-regexp $ENV; then
+    echo "Workspace Found: ${ENV}"
+else
+    echo -e "${RED}ERROR: Workspace not found.${NC} Workspaces found:"
+	echo -e "$GREEN"
+    echo "${DENV}" && exit 1
+	echo -e "$NC"
+fi
+
+## Next validate the email address
+if [[ $EMAIL != *"gmail.com" ]]; then
+    echo -e "${RED}WARNING: Use of @gmail.com is required${NC}"
+fi
+
+## Next fetch the tokens and store them into an array
+databricks=( $(grep -A 0 -B 0 -E "(.*)${WORKSPACE[$ENV]}(.*)" ~/.databrickscfg) )
+declare -p databricks > /dev/null 2>&1
+
+databricks_token=( $(grep -A 1 -B 0  -E "(.*)${WORKSPACE[$ENV]}(.*)" ~/.databricks/token-cache.json) )
+
+## Finally make a call using cached token
+token=$(echo  ${databricks_token[3]} | tr -d '"' || '')
+
+echo -e "Using databricks workspace: ${GREEN}${databricks[2]}${NC}"
+eval "curl -H 'Authorization: Bearer $token' ${databricks[2]}/api/2.0/preview/scim/v2/Users\?filter\=userName+eq+${EMAIL}" | jq .
+
+
+# eval "curl -H 'Authorization: Bearer ${token}' https://dbc-5e4c4e7b-aa35.cloud.databricks.com/api/2.0/preview/scim/v2/Users\?filter\=userName+eq+${EMAIL}" | jq .
